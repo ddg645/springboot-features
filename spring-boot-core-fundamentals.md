@@ -7,10 +7,13 @@
   - `@EnableAutoConfiguration`: Tells Spring Boot to auto-configure beans based on classpath settings, other beans, and various property settings.
   - `@ComponentScan`: Enables component scanning for the package where the class is located.
 - ✅ **Interview Insight**: Be ready to explain how Spring Boot finds configurations without XML.
+  - Spring Boot avoids XML by using annotations (`@Configuration`, `@Bean`) and **class-path scanning**.
+  - It detects classes annotated with `@Configuration`, `@Component`, `@Service`, etc., via `@ComponentScan`.
+  - The `spring.factories` mechanism loads `@EnableAutoConfiguration` classes listed in `META-INF/spring.factories`, allowing Spring to automatically wire dependencies without needing explicit XML config.
 
 ### 2. Auto-Configuration via Classpath Detection
 
-- Spring Boot uses `` to load `AutoConfiguration` classes.
+- Spring Boot uses `META-INF/spring.factories` to load `AutoConfiguration` classes.
 - Example: If `spring-boot-starter-data-jpa` is in the classpath, it configures H2 DB, EntityManager, etc.
 - You can override or customize by defining your own `@Bean`:
   ```java
@@ -27,7 +30,7 @@
   - `spring-boot-starter-data-jpa`: JPA, Hibernate, JDBC.
   - `spring-boot-starter-security`, `spring-boot-starter-test`, etc.
 
-📝 **Tip**: They simplify dependency management and version compatibility.
+📜 **Tip**: They simplify dependency management and version compatibility.
 
 ### 4. Spring Boot CLI
 
@@ -91,3 +94,4 @@ spring.profiles.active=dev
   ```
 
 - Change server by modifying dependencies in `pom.xml` or `build.gradle`.
+
